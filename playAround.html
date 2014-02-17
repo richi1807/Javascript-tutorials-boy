@@ -11,9 +11,28 @@
                         window.onload = function(){
                                 assert(true , "The text framework is running");
                                 assert(false ,"Here is a failure case");
+                                var outerValue = 'ninja';
+                                var later ; 
+                                function outerFunction() {
+                                        var innerValue = "samurai" ;
+                                        function innerFunction(paramValue){
+                                                assert(outerValue == "ninja" , "I can see the ninja variable");
+                                                assert(innerValue == "samurai" , "I can see the samurai");
+                                                assert(!!paramValue , "It can see the paramValue");
+                                                assert(!!toolate , "It can also see the tooLate variable");
+                                        }
+                                        later = innerFunction ;
+                               }
+                               assert(!toolate , "The outer cannot see the toolate variable");
+                               var toolate = "Late";
+                                        
+                               outerFunction();
+                               later("param");
                         }
+                        
                 </script>
                 <style>
+                        body {background-color:rgb(204 , 241 , 29) ; border-style: groove}
                         #results li.pass {color:green ;}
                         #results li.fail {color:red ; }
                 </style>
